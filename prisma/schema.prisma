@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+  email                String    @unique
+  name                 String
+  password             String
+  createdAt            DateTime  @default(now())
+  resetPasswordToken   String?
+  resetPasswordExpires DateTime?
+
+  Ethereum  Ethereum[]
+  Bitcoin   Bitcoin[]
+  Algorand  Algorand[]
+  Cardano   Cardano[]
+  Avalanche Avalanche[]
+  Stellar   Stellar[]
+  Polygon   Polygon[]
+}
+
+model Ethereum {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
+
+model Bitcoin {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
+
+model Algorand {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
+
+model Cardano {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
+
+model Avalanche {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
+
+model Stellar {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
+
+model Polygon {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  address     String  @unique
+  privateKey  String  @unique
+  accountname String?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @db.ObjectId
+}
